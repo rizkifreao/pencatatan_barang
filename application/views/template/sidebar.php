@@ -49,121 +49,55 @@
           </div>
         </div>
         <ul class="nav">
-          <li class="nav-item active ">
-            <a class="nav-link" href="<?=base_url() ?>/examples/dashboard.html">
+          <li class="nav-item <?= uri_string() == 'dashboard' ? 'active' : '' ?> ">
+            <a class="nav-link" href="<?=base_url('dashboard') ?>">
               <i class="material-icons">dashboard</i>
               <p> Dashboard </p>
             </a>
           </li>
-          <!-- <li class="nav-item ">
-            <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
-              <i class="material-icons">image</i>
-              <p> Pages
-                <b class="caret"></b>
-              </p>
-            </a>
-            <div class="collapse" id="pagesExamples">
-              <ul class="nav">
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/pages/pricing.html">
-                    <span class="sidebar-mini"> P </span>
-                    <span class="sidebar-normal"> Pricing </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/pages/rtl.html">
-                    <span class="sidebar-mini"> RS </span>
-                    <span class="sidebar-normal"> RTL Support </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/pages/timeline.html">
-                    <span class="sidebar-mini"> T </span>
-                    <span class="sidebar-normal"> Timeline </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/pages/login.html">
-                    <span class="sidebar-mini"> LP </span>
-                    <span class="sidebar-normal"> Login Page </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/pages/register.html">
-                    <span class="sidebar-mini"> RP </span>
-                    <span class="sidebar-normal"> Register Page </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/pages/lock.html">
-                    <span class="sidebar-mini"> LSP </span>
-                    <span class="sidebar-normal"> Lock Screen Page </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/pages/user.html">
-                    <span class="sidebar-mini"> UP </span>
-                    <span class="sidebar-normal"> User Profile </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/pages/error.html">
-                    <span class="sidebar-mini"> E </span>
-                    <span class="sidebar-normal"> Error Page </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li> -->
-          <li class="nav-item ">
+          <li class="nav-item <?= uri_string() == 'material' || uri_string() == 'produk' || uri_string() == 'jenis'? 'active' : '' ?>">
             <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
               <i class="material-icons">apps</i>
-              <p> Master
+              <p> Master Data
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse" id="componentsExamples">
+            <div class="collapse <?=uri_string() == 'material' || uri_string() == 'produk' || uri_string() == 'jenis'? 'show' : '' ?>" id="componentsExamples">
               <ul class="nav">
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/components/buttons.html">
-                    <i class="material-icons">library_books</i>
-                    <span class="sidebar-normal"> Barang </span>
+                <li class="nav-item <?= uri_string() == 'material' ? 'active' : '' ?>">
+                  <a class="nav-link" href="<?=base_url('material') ?>">
+                    <i class="material-icons">M</i>
+                    <span class="sidebar-normal"> Material </span>
+                  </a>
+                </li>
+                <li class="nav-item <?= uri_string() == 'produk' ? 'active' : '' ?>">
+                  <a class="nav-link" href="<?=base_url('produk') ?>">
+                    <i class="material-icons">P</i>
+                    <span class="sidebar-normal"> Produk </span>
+                  </a>
+                </li>
+                 <li class="nav-item <?= uri_string() == 'satuan' ? 'active' : '' ?>">
+                  <a class="nav-link" href="<?=base_url('satuan') ?>">
+                    <i class="material-icons">S</i>
+                    <span class="sidebar-normal"> Satuan </span>
                   </a>
                 </li>
               </ul>
             </div>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item <?= uri_string() == 'pembelian'? 'active' : '' ?>">
             <a class="nav-link" data-toggle="collapse" href="#formsExamples">
-              <i class="material-icons">content_paste</i>
-              <p> Forms
+              <i class="material-icons">input</i>
+              <p> Barang Masuk
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse" id="formsExamples">
+            <div class="collapse <?= uri_string() == 'pembelian'? 'show' : '' ?>" id="formsExamples">
               <ul class="nav">
                 <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/forms/regular.html">
-                    <span class="sidebar-mini"> RF </span>
-                    <span class="sidebar-normal"> Regular Forms </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/forms/extended.html">
-                    <span class="sidebar-mini"> EF </span>
-                    <span class="sidebar-normal"> Extended Forms </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/forms/validation.html">
-                    <span class="sidebar-mini"> VF </span>
-                    <span class="sidebar-normal"> Validation Forms </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/forms/wizard.html">
-                    <span class="sidebar-mini"> W </span>
-                    <span class="sidebar-normal"> Wizard </span>
+                  <a class="nav-link" href="<?=base_url('pembelian') ?>">
+                    <span class="sidebar-mini"> PM </span>
+                    <span class="sidebar-normal"> Pembelian Material </span>
                   </a>
                 </li>
               </ul>
@@ -171,8 +105,8 @@
           </li>
           <li class="nav-item ">
             <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
-              <i class="material-icons">grid_on</i>
-              <p> Tables
+              <i class="material-icons">assignment_return</i>
+              <p> Barang Keluar
                 <b class="caret"></b>
               </p>
             </a>
@@ -184,55 +118,13 @@
                     <span class="sidebar-normal"> Regular Tables </span>
                   </a>
                 </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/tables/extended.html">
-                    <span class="sidebar-mini"> ET </span>
-                    <span class="sidebar-normal"> Extended Tables </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/tables/datatables.net.html">
-                    <span class="sidebar-mini"> DT </span>
-                    <span class="sidebar-normal"> DataTables.net </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
-              <i class="material-icons">place</i>
-              <p> Maps
-                <b class="caret"></b>
-              </p>
-            </a>
-            <div class="collapse" id="mapsExamples">
-              <ul class="nav">
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/maps/google.html">
-                    <span class="sidebar-mini"> GM </span>
-                    <span class="sidebar-normal"> Google Maps </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/maps/fullscreen.html">
-                    <span class="sidebar-mini"> FSM </span>
-                    <span class="sidebar-normal"> Full Screen Map </span>
-                  </a>
-                </li>
-                <li class="nav-item ">
-                  <a class="nav-link" href="<?=base_url() ?>/examples/maps/vector.html">
-                    <span class="sidebar-mini"> VM </span>
-                    <span class="sidebar-normal"> Vector Map </span>
-                  </a>
-                </li>
               </ul>
             </div>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="<?=base_url() ?>/examples/widgets.html">
               <i class="material-icons">widgets</i>
-              <p> Widgets </p>
+              <p> Laporan </p>
             </a>
           </li>
           <li class="nav-item ">

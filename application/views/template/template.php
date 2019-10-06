@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="<?=base_url() ?>/assets/css/material-dashboard.min.css?v=2.1.0" rel="stylesheet" />
+  <link href="<?=base_url() ?>/assets/select2/dist/css/select2.min.css" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="<?=base_url() ?>/assets/demo/demo.css" rel="stylesheet" />
   <!-- Google Tag Manager -->
@@ -64,6 +65,14 @@
 </head>
 
 <body class="">
+  <!--   Core JS Files   -->
+  <script>
+    var base_url = '<?= base_url() ?>' // Buat variabel base_url agar bisa di akses di semua file js
+  </script>
+  <script src="<?=base_url() ?>/assets/js/core/jquery.min.js"></script>
+  <script src="<?=base_url() ?>/assets/js/core/popper.min.js"></script>
+  <script src="<?=base_url() ?>/assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="<?=base_url() ?>/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Extra details for Live View on GitHub Pages -->
   <!-- Google Tag Manager (noscript) -->
   <noscript>
@@ -222,11 +231,7 @@
       </ul>
     </div>
   </div>
-  <!--   Core JS Files   -->
-  <script src="<?=base_url() ?>/assets/js/core/jquery.min.js"></script>
-  <script src="<?=base_url() ?>/assets/js/core/popper.min.js"></script>
-  <script src="<?=base_url() ?>/assets/js/core/bootstrap-material-design.min.js"></script>
-  <script src="<?=base_url() ?>/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  
   <!-- Plugin for the momentJs  -->
   <script src="<?=base_url() ?>/assets/js/plugins/moment.min.js"></script>
   <!--  Plugin for Sweet Alert -->
@@ -241,6 +246,8 @@
   <script src="<?=base_url() ?>/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
   <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
   <script src="<?=base_url() ?>/assets/js/plugins/jquery.dataTables.min.js"></script>
+  <!--  Select2 Plugin  -->
+  <script src="<?=base_url() ?>/assets/select2/dist/js/select2.min.js"></script>
   <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
   <script src="<?=base_url() ?>/assets/js/plugins/bootstrap-tagsinput.js"></script>
   <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
@@ -267,9 +274,82 @@
   <script src="<?=base_url() ?>/assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="<?=base_url() ?>/assets/demo/demo.js"></script>
+  <script src="<?=base_url() ?>/assets/js/pembelian.js"></script>
+
+  <?php
+    if ($this->session->flashdata('alert')) {
+        echo $this->session->flashdata('alert');
+    } ?>
+
   <script>
+    function setFormValidation(id) {
+      $(id).validate({
+        highlight: function(element) {
+          $(element).closest('.form-group').removeClass('has-success').addClass('has-danger');
+          $(element).closest('.form-check').removeClass('has-success').addClass('has-danger');
+        },
+        success: function(element) {
+          $(element).closest('.form-group').removeClass('has-danger').addClass('has-success');
+          $(element).closest('.form-check').removeClass('has-danger').addClass('has-success');
+        },
+        errorPlacement: function(error, element) {
+          $(element).closest('.form-group').append(error);
+        },
+      });
+    }
+
     $(document).ready(function() {
+      // setFormValidation('#RegisterValidation');
+      setFormValidation('#TypeValidation');
+      // setFormValidation('#ValidationModal #createModal');
+      // console.log($('#ValidationModal'));
+
+      $("#createModal").on('shown.bs.modal',function () {
+        setFormValidation('#ValidationModal');
+      });
+      $("#editModal").on('shown.bs.modal',function () {
+        setFormValidation('#ValidationModal2');
+      });
+      
+      // setFormValidation('#RangeValidation');
+    });
+</script>
+
+  <script>
+    function showConfirm(url) {
+      swal({
+          title: 'Peringatan',
+          text: "Anda yakin akan menghapus data ini ?",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonClass: 'btn btn-success',
+          cancelButtonClass: 'btn btn-danger',
+          confirmButtonText: 'Ya, hapus!',
+          cancelButtonText: 'Batal',
+          buttonsStyling: false
+      }).then(function(result) {
+          if (result.value) {
+            window.location.href = url;
+          }
+      })
+    }
+    
+    $(document).ready(function() {
+
+      $(".datepicker").datetimepicker({
+        format: "Y-M-DD"
+      });
+      // $("#Material").select2();
+      // $(".select2").select2();
       $().ready(function() {
+        $(".custom-table").DataTable({
+          "pagingType": "full_numbers",
+              "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+              ],
+        });
+
         $sidebar = $('.sidebar');
 
         $sidebar_img_container = $sidebar.find('.sidebar-background');
@@ -438,109 +518,6 @@
       });
     });
   </script>
-  <!-- Sharrre libray -->
-  <script src="<?=base_url() ?>/assets/demo/jquery.sharrre.js"></script>
-  <script>
-    $(document).ready(function() {
-
-
-      $('#facebook').sharrre({
-        share: {
-          facebook: true
-        },
-        enableHover: false,
-        enableTracking: false,
-        enableCounter: false,
-        click: function(api, options) {
-          api.simulateClick();
-          api.openPopup('facebook');
-        },
-        template: '<i class="fab fa-facebook-f"></i> Facebook',
-        url: 'https://demos.creative-tim.com/material-dashboard-pro/examples/dashboard.html'
-      });
-
-      $('#google').sharrre({
-        share: {
-          googlePlus: true
-        },
-        enableCounter: false,
-        enableHover: false,
-        enableTracking: true,
-        click: function(api, options) {
-          api.simulateClick();
-          api.openPopup('googlePlus');
-        },
-        template: '<i class="fab fa-google-plus"></i> Google',
-        url: 'https://demos.creative-tim.com/material-dashboard-pro/examples/dashboard.html'
-      });
-
-      $('#twitter').sharrre({
-        share: {
-          twitter: true
-        },
-        enableHover: false,
-        enableTracking: false,
-        enableCounter: false,
-        buttons: {
-          twitter: {
-            via: 'CreativeTim'
-          }
-        },
-        click: function(api, options) {
-          api.simulateClick();
-          api.openPopup('twitter');
-        },
-        template: '<i class="fab fa-twitter"></i> Twitter',
-        url: 'https://demos.creative-tim.com/material-dashboard-pro/examples/dashboard.html'
-      });
-
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-46172202-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-      })();
-
-      // Facebook Pixel Code Don't Delete
-      ! function(f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function() {
-          n.callMethod ?
-            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = '2.0';
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s)
-      }(window,
-        document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-
-      try {
-        fbq('init', '111649226022273');
-        fbq('track', "PageView");
-
-      } catch (err) {
-        console.log('Facebook Track Error:', err);
-      }
-
-    });
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=111649226022273&ev=PageView&noscript=1" />
-  </noscript>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
