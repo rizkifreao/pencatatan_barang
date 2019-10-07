@@ -14,23 +14,38 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Kode Material</th>
-            <th>Label</th>
-            <th>Qty</th>
+            <th>No Faktur</th>
+            <th>Suplier</th>
+            <th>Tanggal</th>
             <th class="disabled-sorting text-right">Actions</th>
           </tr>
         </thead>
-          <tr>
-            <td>1</td>
-            <td>asd</td>
-            <td>asd</td>
-            <td>2</td>
+        <tbody>
+          <?php $no=1; foreach ($pembelians as $key):?>
+            <tr>
+            <td><?=$no++?></td>
+            <td><?=$key->nofaktur?></td>
+            <td><?=$key->suplier?></td>
+            <!-- <td><?=date('d-F-Y', strtotime($key->id_pembelian))?></td> -->
+            <td><?=tgl_indo($key->tanggal)?></td>
             <td class="disabled-sorting text-right">
-            asd
+              <button title="Detail" class="btn btn-link btn-info btn-just-icon view"
+                  onclick="window.location.href='<?=base_url()?>pembelian/detail/<?=$key->id_pembelian?>'">
+                  <i class="material-icons">visibility</i>
+              </button>
+              <?php if ($key->status !== "SELESAI"): ?>
+                <button title="Ubah" class="btn btn-link btn-warning btn-just-icon edit"
+                  onclick="window.location.href='<?=base_url()?>pembelian/create/<?=$key->id_pembelian?>'">
+                  <i class="material-icons">dvr</i>
+                </button>
+              <?php endif ?>
+              <button class="btn btn-link btn-danger btn-just-icon remove" title="Hapus"
+                  onclick="showConfirm('<?=base_url()?>pembelian/delete/<?=$key->id_pembelian?>')">
+                  <i class="material-icons">close</i>
+              </button>
             </td>
           </tr>
-        <tbody>
-          
+          <?php endforeach ?>
         </tbody>
       </table>
     </div>

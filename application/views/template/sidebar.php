@@ -85,16 +85,16 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item <?= uri_string() == 'pembelian'? 'active' : '' ?>">
+          <li class="nav-item <?= $this->uri->segment(1) == 'pembelian'? 'active' : '' ?>">
             <a class="nav-link" data-toggle="collapse" href="#formsExamples">
               <i class="material-icons">input</i>
               <p> Barang Masuk
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse <?= uri_string() == 'pembelian'? 'show' : '' ?>" id="formsExamples">
+            <div class="collapse <?= $this->uri->segment(1) == 'pembelian'? 'show' : '' ?>" id="formsExamples">
               <ul class="nav">
-                <li class="nav-item ">
+                <li class="nav-item <?= $this->uri->segment(1) == 'pembelian'? 'active' : '' ?>">
                   <a class="nav-link" href="<?=base_url('pembelian') ?>">
                     <span class="sidebar-mini"> PM </span>
                     <span class="sidebar-normal"> Pembelian Material </span>

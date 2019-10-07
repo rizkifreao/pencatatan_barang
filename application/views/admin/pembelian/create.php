@@ -1,6 +1,6 @@
-<form action="<?php echo base_url().uri_string() ?>" method="post" autocomplete="off" id="TypeValidation" novalidate="novalidate">
+<?= form_open('pembelian/pembelianfinish','method="post" autocomplete="off" id="TypeValidation" novalidate="novalidate"')?>
   
-  <!-- <input type="hidden" name="status" value="{{ URL::previous() === route('item.out') ? 2 : 1 }}"> -->
+  <input type="hidden" name="id_pembelian" value="<?=$this->uri->segment(3,0)?>">
   <div class="card ">
     <div class="card-header card-header-rose card-header-icon">
       <div class="card-icon">
@@ -15,7 +15,7 @@
       <div class="row">
         <div class="col text-center">
           <button type="submit" class="btn btn-rose">Selesai</button>
-          <button class="btn btn-default" onclick="window.location.href=''">Batal</button>
+          <button type="button" class="btn btn-default" onclick="window.location.href='<?=base_url()?>pembelian/pembelianBatal/<?=$this->uri->segment(3,0)?>'">Batal</button>
         </div>
       </div>
       
@@ -25,28 +25,28 @@
         <div class="col-md-6">
           <div class="form-group bmd-form-group">
             <label for="inputProduk" class="bmd-label-static">Nomor Faktur.</label>
-            <input type="text" class="form-control" id="nofaktur" name="nofaktur" required="true" aria-required="true" aria-invalid="true">
+            <input type="text" class="form-control" id="nofaktur" name="nofaktur" value="<?=$pembelian->nofaktur ?>" required="true" aria-required="true" aria-invalid="true">
           </div>
           <div class="form-group bmd-form-group">
             <label for="inputProduk" class="bmd-label-static">Tanggal.</label>
-            <input type="text" class="form-control datepicker" name="tanggal" placeholder="yyyy-mm-dd" required="true" aria-required="true" aria-invalid="true">
+            <input type="text" class="form-control datepicker" name="tanggal" placeholder="yyyy-mm-dd" value="<?=$pembelian->tanggal ?>" required="true" aria-required="true" aria-invalid="true">
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-group bmd-form-group">
             <label for="inputProduk" class="bmd-label-static">Suplier.</label>
-            <input type="text" class="form-control" id="suplier" name="suplier" required="true" aria-required="true" aria-invalid="true">
+            <input type="text" class="form-control" id="suplier" name="suplier" required="true" value="<?=$pembelian->suplier ?>" aria-required="true" aria-invalid="true">
           </div>
           <div class="form-group bmd-form-group">
             <label for="inputProduk" class="bmd-label-static">Keterangan.</label>
-            <textarea type="text" class="form-control" id="keterangan" name="keterangan"></textarea>
+            <textarea type="text" class="form-control" id="keterangan" name="keterangan"><?=$pembelian->keterangan ?></textarea>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+</form>
   <div class="card">
     <div class="card-header card-header-primary card-header-icon">
       <a href="#" class="card-icon text-white" id="btn-tambah" data-toggle="modal" data-target="#createModal">
@@ -63,7 +63,7 @@
     </div>
   <!-- end content-->
   </div>
-</form>
+
 
 <div id="createModal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -75,7 +75,7 @@
         </button>
       </div>
       <?php //echo form_open("pembelian/addMaterial","class='form-horizontal' autocomplete='off' id='ValidationModal' novalidate='novalidate'"); ?>
-      <form  class='form-horizontal' autocomplete='off' id='ValidationModal' novalidate='novalidate'>
+      <form class='form-horizontal' autocomplete='off' id='ValidationModal' novalidate='novalidate'>
         <input type="hidden" name="pembelianid" id="pembelianid" value="<?=$this->uri->segment(3,0)?>">
         <div class="modal-body">
           <div class="row">
@@ -103,7 +103,7 @@
       
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="btn-simpan">Simpan</button>
+          <button type="submit" class="btn btn-primary" id="btn-simpan">Simpan</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
         </div>
       <?=form_close();?>
@@ -120,7 +120,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <?=form_open("pembelian/addMaterial","class='form-horizontal' autocomplete='off' id='ValidationModal2' novalidate='novalidate'"); ?>
+      <?php //form_open("pembelian/addMaterial","class='form-horizontal' autocomplete='off' id='ValidationModal2' novalidate='novalidate'"); ?>
+      <form class='form-horizontal' autocomplete='off' id='ValidationModal2' novalidate='novalidate'>
         <input type="hidden" name="pembelianid" id="pembelianid" value="<?=$this->uri->segment(3,0)?>">
         <input type="hidden" name="id" id="id">
         <input type="hidden" name="materialid" id="materialid">
@@ -146,7 +147,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Simpan</button>
+          <button type="button" class="btn btn-primary" id="btn-ubah">Simpan</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
         </div>
       <?=form_close();?>
@@ -155,16 +156,8 @@
 </div>
 
 <script>
-  $(document).ready(function () {
-
-    $("#Material").select2({
-        tags: true,
-        dropdownParent: $("#createModal")
-    });
-  });
-
   function getDetail(ini) {
-    clearForm();
+    $('#jumlah').val("");
     var id = $(ini).attr('data-id');
     $.ajax({
       type: 'GET',
@@ -178,13 +171,6 @@
          $('#editModal #materialid').val(data.materialid).hide();
         }
     });
-  }
-
-  function clearForm() {
-    document.getElementById("Material").selectedIndex = "0";   
-    //  $('#Material').val(0);
-     $('#jumlah').val("");
-    // document.getElementById("#ValidationModal").reset();
   }
 
 </script>

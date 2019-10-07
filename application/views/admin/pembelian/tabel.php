@@ -23,7 +23,7 @@
                 <i class="material-icons">dvr</i>
             </button>
             <button class="btn btn-link btn-danger btn-just-icon remove" title="Hapus"
-                onclick="showConfirm('<?=base_url();?>material/delete/<?=$key->id?>')">
+                onclick="hapus_det_pembelian('<?=$key->id?>')">
                 <i class="material-icons">close</i>
             </button>
         </td>

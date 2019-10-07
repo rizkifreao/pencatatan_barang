@@ -274,7 +274,7 @@
   <script src="<?=base_url() ?>/assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="<?=base_url() ?>/assets/demo/demo.js"></script>
-  <script src="<?=base_url() ?>/assets/js/pembelian.js"></script>
+  
 
   <?php
     if ($this->session->flashdata('alert')) {
@@ -314,25 +314,25 @@
       // setFormValidation('#RangeValidation');
     });
 </script>
-
+<script src="<?=base_url() ?>/assets/js/pembelian.js"></script>
   <script>
-    function showConfirm(url) {
-      swal({
-          title: 'Peringatan',
-          text: "Anda yakin akan menghapus data ini ?",
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonClass: 'btn btn-success',
-          cancelButtonClass: 'btn btn-danger',
-          confirmButtonText: 'Ya, hapus!',
-          cancelButtonText: 'Batal',
-          buttonsStyling: false
-      }).then(function(result) {
-          if (result.value) {
-            window.location.href = url;
-          }
-      })
-    }
+  function showConfirm(url) {
+    swal({
+        title: 'Peringatan',
+        text: "Anda yakin akan menghapus data ini ?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonClass: 'btn btn-success',
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal',
+        buttonsStyling: false
+    }).then(function(result) {
+        if (result.value) {
+          window.location.href = url;
+        }
+    })
+  }
     
     $(document).ready(function() {
 
