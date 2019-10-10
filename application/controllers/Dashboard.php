@@ -1,6 +1,21 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ *
+ * Model Dashboard
+ *
+ * This Model for ...
+ * 
+ * @package		CodeIgniter
+ * @category	Model
+ * @author    rizkipebrianto <rizkipebrianto96@gmail.com>
+ * @link      https://github.com/rizkifreao
+ * @param     ...
+ * @return    ...
+ *
+ */
+
 class Dashboard extends CI_Controller {
 
 

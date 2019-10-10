@@ -40,7 +40,7 @@
                 </button>
               <?php endif ?>
               <button class="btn btn-link btn-danger btn-just-icon remove" title="Hapus"
-                  onclick="showConfirm('<?=base_url()?>pembelian/delete/<?=$key->id_pembelian?>')">
+                  onclick="hapusConfirm('<?=base_url()?>pembelian/delete/<?=$key->id_pembelian?>')">
                   <i class="material-icons">close</i>
               </button>
             </td>

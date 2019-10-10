@@ -34,7 +34,7 @@
                         <i class="material-icons">dvr</i>
                     </button>
                     <button class="btn btn-link btn-danger btn-just-icon remove" title="Hapus"
-                        onclick="showConfirm('<?=base_url();?>produk/delete/<?=$key->id_produk ?>')">
+                        onclick="hapusConfirm('<?=base_url();?>produk/delete/<?=$key->id_produk ?>')">
                         <i class="material-icons">close</i>
                     </button>
               </td>

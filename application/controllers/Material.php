@@ -1,6 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed'); 
- 
+
+/**
+ *
+ * Model Material
+ *
+ * This Model for ...
+ * 
+ * @package		CodeIgniter
+ * @category	Model
+ * @author    rizkipebrianto <rizkipebrianto96@gmail.com>
+ * @link      https://github.com/rizkifreao
+ * @param     ...
+ * @return    ...
+ *
+ */
 
 class Material extends CI_Controller { 
 

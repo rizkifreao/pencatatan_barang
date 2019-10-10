@@ -4,16 +4,13 @@ if (! function_exists('success')) {
 	function success($text) {
 		$alert = "
 		<script type='text/javascript'>
-		 const Toast = Swal.mixin({
-				toast: true,
-				position: 'top-end',
-				showConfirmButton: false,
-				timer: 3000
+		$(document).ready(function(){
+		 $.notify({
+			icon:'done',
+			message:'".$text."'},
+			{type:'success',timer:3e3,placement:{from:'bottom',align:'right'}
 			})
-			Toast.fire({
-				type: 'success',
-				title: '".$text."'
-			})
+		})
 		</script>
 		";
 		return $alert;
@@ -24,17 +21,14 @@ if (! function_exists('error')) {
 	function error($text) {
 		$alert = "
 		<script type='text/javascript'>
-    		const Toast = Swal.mixin({
-				toast: true,
-				position: 'top-end',
-				showConfirmButton: false,
-				timer: 3000
+		$(document).ready(function(){
+		 $.notify({
+			icon:'close',
+			message:'".$text."'},
+			{type:'danger',timer:3e3,placement:{from:'bottom',align:'right'}
 			})
-			Toast.fire({
-				type: 'error',
-				title: '".$text."'
-			})
-    	</script>
+		})
+		</script>
 		";
 
 		return $alert;

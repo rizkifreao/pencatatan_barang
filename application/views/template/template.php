@@ -316,7 +316,7 @@
 </script>
 <script src="<?=base_url() ?>/assets/js/pembelian.js"></script>
   <script>
-  function showConfirm(url) {
+  function hapusConfirm(url) {
     swal({
         title: 'Peringatan',
         text: "Anda yakin akan menghapus data ini ?",

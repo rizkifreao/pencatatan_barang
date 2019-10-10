@@ -34,7 +34,7 @@ function hapus_det_pembelian(id_detail) {
 					 * Lalu munculkan div pesan-sukes nya
 					 * Setelah 10 detik, sembunyikan kembali pesan suksesnya
 					 */
-					show_notif(response.status, response.pesan)
+					notificationShow(response.status, response.pesan, 'done')
 
 					// $('#delete-modal').modal('hide') // Close / Tutup Modal Dialog
 				}
@@ -80,7 +80,7 @@ $(document).ready(function () {
 						 * Lalu munculkan div pesan-sukes nya
 						 * Setelah 10 detik, sembunyikan kembali pesan suksesnya
 						 */
-						show_notif(response.status, response.pesan)
+						notificationShow('success', response.pesan, 'done')
 
 						$('#createModal').modal('hide') // Close / Tutup Modal Dialog
 					} else { // Jika statusnya = gagal
@@ -88,7 +88,7 @@ $(document).ready(function () {
 						 * Ambil pesan errornya dan set ke div pesan-error
 						 * Lalu munculkan div pesan-error nya
 						 */
-						show_notif(response.status, response.pesan)
+						notificationShow('danger', response.pesan, 'close')
 					}
 				},
 				error: function (xhr, ajaxOptions, thrownError) { // Ketika terjadi error
@@ -124,7 +124,7 @@ $(document).ready(function () {
 						 * Setelah 10 detik, sembunyikan kembali pesan suksesnya
 						 */
 
-						show_notif(response.status, response.pesan)
+						notificationShow('success', response.pesan, 'done')
 
 						$('#editModal').modal('hide') // Close / Tutup Modal Dialog
 					} else { // Jika statusnya = gagal
@@ -132,7 +132,7 @@ $(document).ready(function () {
 						 * Ambil pesan errornya dan set ke div pesan-error
 						 * Lalu munculkan div pesan-error nya
 						 */
-						show_notif(response.status, response.pesan)
+						notificationShow('danger', response.pesan, 'close')
 					}
 				},
 				error: function (xhr, ajaxOptions, thrownError) { // Ketika terjadi error
@@ -148,15 +148,26 @@ $(document).ready(function () {
 	})
 })
 
-function show_notif(status, pesan) {
-	const Toast = Swal.mixin({
-		toast: true,
-		position: 'top-end',
-		showConfirmButton: false,
-		timer: 3000
-	})
-	Toast.fire({
-		type: status,
-		title: pesan
+function notificationShow(s, p, i) {
+	// const Toast = Swal.mixin({
+	// 	toast: true,
+	// 	position: 'top-end',
+	// 	showConfirmButton: false,
+	// 	timer: 3000
+	// })
+	// Toast.fire({
+	// 	type: status,
+	// 	title: pesan
+	// })
+	$.notify({
+		icon: i,
+		message: p
+	}, {
+		type: s,
+		timer: 3e3,
+		placement: {
+			from: 'bottom',
+			align: 'right'
+		}
 	})
 }

@@ -1,5 +1,20 @@
 <?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
+/**
+ *
+ * Model M_Material
+ *
+ * This Model for ...
+ * 
+ * @package		CodeIgniter
+ * @category	Model
+ * @author      rizkifreao <rizkipebrianto96@gmail.com>
+ * @link        https://github.com/rizkifreao
+ * @param       ...
+ * @return      ...
+ *
+ */
+
 class M_Material extends CI_Model {
 
     var $table_name = "material";

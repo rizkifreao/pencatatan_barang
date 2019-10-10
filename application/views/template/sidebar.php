@@ -114,8 +114,8 @@
               <ul class="nav">
                 <li class="nav-item ">
                   <a class="nav-link" href="<?=base_url() ?>/examples/tables/regular.html">
-                    <span class="sidebar-mini"> RT </span>
-                    <span class="sidebar-normal"> Regular Tables </span>
+                    <span class="sidebar-mini"> P </span>
+                    <span class="sidebar-normal"> Permintaan Material </span>
                   </a>
                 </li>
               </ul>
