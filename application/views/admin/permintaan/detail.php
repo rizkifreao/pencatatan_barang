@@ -6,7 +6,7 @@
       </i>
     </div>
     <h4 class="card-title">
-      Detail Pembelian Material
+      Detail Permintaan Material
     </h4>
     <br>
     
@@ -16,22 +16,22 @@
       <div class="col-md-6">
         <div class="form-group bmd-form-group">
           <label for="inputProduk" class="bmd-label-static">Nomor Faktur.</label>
-          <input type="text" class="form-control" id="nofaktur" name="nofaktur" value="<?=$pembelian->nofaktur ?>" disabled>
+          <input type="text" class="form-control" id="nofaktur" name="nofaktur" value="<?=$permintaan->id_permintaan ?>" disabled>
         </div>
         <div class="form-group bmd-form-group">
           <label for="inputProduk" class="bmd-label-static">Tanggal.</label>
-          <input type="text" class="form-control datepicker" name="tanggal" placeholder="yyyy-mm-dd" value="<?=$pembelian->tanggal ?>" disabled>
+          <input type="text" class="form-control datepicker" name="tanggal" value="<?=$permintaan->tanggal ?>" disabled>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group bmd-form-group">
-          <label for="inputProduk" class="bmd-label-static">Suplier.</label>
-          <input type="text" class="form-control" id="suplier" name="suplier" value="<?=$pembelian->suplier ?>" disabled>
+          <label for="inputProduk" class="bmd-label-static">Produk.</label>
+          <input type="text" class="form-control" value="<?=$this->M_Produk->getDetail($permintaan->produkid)->label ?>" disabled>
         </div>
         <div class="form-group bmd-form-group">
           <label for="inputProduk" class="bmd-label-static">Keterangan.</label>
-          <textarea type="text" class="form-control" id="keterangan" name="keterangan" disabled><?=$pembelian->keterangan ?></textarea>
+          <textarea type="text" class="form-control" id="keterangan" name="keterangan" disabled><?=$permintaan->keterangan ?></textarea>
         </div>
       </div>
     </div>
@@ -44,18 +44,16 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Kode Material</th>
-            <th>Label</th>
+            <th>Bahan baku</th>
             <th>Jumlah</th>
           </tr>
         </thead>
         <tbody>
-          <?php $no=1; foreach ($det_pembelian as $key ):?>
+          <?php $no=1; foreach ($det_permintaan as $key ):?>
           <tr>
             <td><?=$no++?></td>
-            <td><?=$key->materialid?></td>
             <td><?=$this->M_Material->getDetail($key->materialid)->label?></td>
-            <td><?=$key->jumlah?></td>
+            <td><?=$key->jumlah." ".$this->M_Satuan->getDetail($key->satuanid)->nama_satuan?></td>
           </tr>
           <?php endforeach ?>
         </tbody>

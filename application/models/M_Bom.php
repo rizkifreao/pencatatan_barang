@@ -40,6 +40,12 @@ class M_Bom extends CI_Model {
     return $query->row();
   }
 
+  function getDetailWhere($kondisi) {
+    $this->db->where($kondisi);
+    $query = $this->db->get($this->table_name);
+    return $query->row();
+  }
+
   function insert($data) {
     $this->db->insert($this->table_name, $data);
   }

@@ -96,6 +96,7 @@
     <?php echo form_open("bom/addDetail","class='form-horizontal' autocomplete='off' id='TypeValidation' novalidate='novalidate'"); ?>
     <!-- <form class='form-horizontal' autocomplete='off' id='TypeValidation' novalidate='novalidate'> -->
       <input type="hidden" name="bomid" id="bomid" value="<?=$this->uri->segment(3,0)?>">
+      <input type="hidden" name="produkid" id="produkid" value="<?=$bom->produkid?>">
       <div class="modal-body">
         <div class="row">
           <label for="inputState" class="col-md-3 col-form-label">Bahan Baku</label>
@@ -159,6 +160,7 @@
       <input type="hidden" name="id" id="id">
       <input type="hidden" name="satuanid" id="satuanid">
       <input type="hidden" name="bomid" id="bomid" value="<?=$this->uri->segment(3,0)?>">
+      <input type="hidden" name="produkid" id="produkid" value="<?=$bom->produkid?>">
 
       <div class="modal-body">
 

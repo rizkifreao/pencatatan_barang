@@ -84,6 +84,7 @@ class Bom extends CI_Controller {
         $data['bomid'] = $bomid = $this->input->post('bomid',TRUE);
         $data['qty'] = $this->input->post('jumlah',TRUE);
         $data['satuanid'] = $this->input->post('satuanid',TRUE);
+        $data['produkid'] = $this->input->post('produkid',TRUE);
         
         if ($id) { // jika id terisi maka proses yang dilakukan yaitu Update
             $data['updated_at'] = date('Y-m-d H:i:s');

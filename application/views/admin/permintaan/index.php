@@ -1,9 +1,9 @@
 <div class="card">
   <div class="card-header card-header-rose card-header-icon">
-    <a href="#" class="card-icon" onclick="window.location.href = '<?=base_url()?>pembelian/create'">
+    <a href="#" class="card-icon" onclick="window.location.href = '<?=base_url()?>permintaan/create'">
       <i class="material-icons text-light">add</i>
     </a>
-    <h4 class="card-title">Daftar Pembelian Material</h4>
+    <h4 class="card-title">Daftar Permintaan Bahan Baku</h4>
   </div>
   <div class="card-body">
     <div class="toolbar">
@@ -14,50 +14,41 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>id_permintaan</th>
+            <th>ID</th>
             <th>Produk</th>
-            <th>Qty</th>
+            <th>Jumlah</th>
             <th>Tanggal</th>
+            <th>Status</th>
             <th>Keterangan</th>
             <th class="disabled-sorting text-right">Actions</th>
           </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>Baju</td>
-            <td>2</td>
-            <td>12 feb 2019</td>
-            <td>tidak ada</td>
-            <td class="disabled-sorting text-right">Actions</td>
-          </tr>
 
-          <?php //$no=1; foreach ($pembelians as $key):?>
-            <!-- <tr>
-            <td><?=$no++?></td>
-            <td><?=$key->nofaktur?></td>
-            <td><?=$key->suplier?></td> -->
-            <!-- <td><?=date('d-F-Y', strtotime($key->id_pembelian))?></td> -->
-            <!-- <td><?=tgl_indo($key->tanggal)?></td>
+        <?php $no=1; foreach ($permintaan as $key):?>
+          <tr>
+            <td><?=$no++ ?></td>
+            <td><?=$key->id_permintaan ?></td>
+            <td><?=$this->M_Produk->getDetail($key->produkid)->label ?></td>
+            <td><?=$key->qty_permintaan ?></td>
+            <td><?=tgl_indo($key->tanggal) ?></td>
+            <td><?=$key->status ?></td>
+            <td><?=$key->keterangan ?></td>
             <td class="disabled-sorting text-right">
               <button title="Detail" class="btn btn-link btn-info btn-just-icon view"
-                  onclick="window.location.href='<?=base_url()?>pembelian/detail/<?=$key->id_pembelian?>'">
+                  onclick="window.location.href='<?=base_url()?>permintaan/detail/<?=$key->id_permintaan?>'">
                   <i class="material-icons">visibility</i>
-              </button> -->
+              </button>
               <?php //if ($key->status !== "SELESAI"): ?>
-                <!-- <button title="Ubah" class="btn btn-link btn-warning btn-just-icon edit"
-                  onclick="window.location.href='<?=base_url()?>pembelian/create/<?=$key->id_pembelian?>'">
-                  <i class="material-icons">dvr</i>
-                </button> -->
+      
               <?php //endif ?>
-              <!-- <button class="btn btn-link btn-danger btn-just-icon remove" title="Hapus"
-                  onclick="hapusConfirm('<?=base_url()?>pembelian/delete/<?=$key->id_pembelian?>')">
-                  <i class="material-icons">close</i>
-              </button> -->
+              <button class="btn btn-link btn-primary btn-just-icon remove" title="Selesai"
+                  onclick="window.location.href = '<?=base_url()?>produksi/create/<?=$key->id_permintaan?>'">
+                  <i class="material-icons">send</i>
+              </button>
             </td>
           </tr>
-          <?php //endforeach ?>
+        <?php endforeach ?>
         </tbody>
       </table>
     </div>

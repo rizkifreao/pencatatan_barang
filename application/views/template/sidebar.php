@@ -87,18 +87,18 @@
           </li>
           <li class="nav-item <?= $this->uri->segment(1) == 'bom'? 'active' : '' ?>">
             <a class="nav-link" href="<?=base_url('bom') ?>">
-              <i class="material-icons">widgets</i>
+              <i class="material-icons">timeline</i>
               <p> Bill Of Material </p>
             </a>
           </li>
-          <li class="nav-item <?= $this->uri->segment(1) == 'pembelian'? 'active' : '' ?>">
+          <li class="nav-item <?= $this->uri->segment(1) == 'pembelian' || $this->uri->segment(1) == 'produksi' ? 'active' : '' ?>">
             <a class="nav-link" data-toggle="collapse" href="#formsExamples">
               <i class="material-icons">input</i>
               <p> Barang Masuk
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse <?= $this->uri->segment(1) == 'pembelian'? 'show' : '' ?>" id="formsExamples">
+            <div class="collapse <?= $this->uri->segment(1) == 'pembelian' || $this->uri->segment(1) == 'produksi'? 'show' : '' ?>" id="formsExamples">
               <ul class="nav">
                 <li class="nav-item <?= $this->uri->segment(1) == 'pembelian'? 'active' : '' ?>">
                   <a class="nav-link" href="<?=base_url('pembelian') ?>">
@@ -107,7 +107,17 @@
                   </a>
                 </li>
               </ul>
+
+              <ul class="nav">
+                <li class="nav-item <?= $this->uri->segment(1) == 'produksi'? 'active' : '' ?>">
+                  <a class="nav-link" href="<?=base_url('produksi') ?>">
+                    <span class="sidebar-mini"> PJ </span>
+                    <span class="sidebar-normal"> Produk Jadi </span>
+                  </a>
+                </li>
+              </ul>
             </div>
+        
           </li>
           <li class="nav-item <?= $this->uri->segment(1) == 'permintaan'? 'active' : '' ?>">
             <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
@@ -131,18 +141,6 @@
             <a class="nav-link" href="<?=base_url() ?>/examples/widgets.html">
               <i class="material-icons">widgets</i>
               <p> Laporan </p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="<?=base_url() ?>/examples/charts.html">
-              <i class="material-icons">timeline</i>
-              <p> Charts </p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="<?=base_url() ?>/examples/calendar.html">
-              <i class="material-icons">date_range</i>
-              <p> Calendar </p>
             </a>
           </li>
         </ul>

@@ -33,6 +33,12 @@ class M_Bom_detail extends CI_Model {
     $query = $this->db->get_where($this->table_name, $kondisi);
     return $query->result();
   }
+
+  function getDetailWhere($kondisi) {
+    $this->db->where($kondisi);
+    $query = $this->db->get($this->table_name);
+    return $query->row();
+  }
   
   function getDetail($id) {
     $this->db->where($this->pk, $id);

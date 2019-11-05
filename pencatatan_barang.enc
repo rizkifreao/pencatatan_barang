@@ -27,18 +27,20 @@ CREATE TABLE IF NOT EXISTS `bom` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `produkid` (`produkid`),
   CONSTRAINT `FK_bom_produk` FOREIGN KEY (`produkid`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Dumping data for table pencatatan_barang.bom: ~2 rows (approximately)
+-- Dumping data for table pencatatan_barang.bom: ~3 rows (approximately)
 /*!40000 ALTER TABLE `bom` DISABLE KEYS */;
 INSERT INTO `bom` (`id`, `produkid`, `label`, `keterangan`, `created_at`, `updated_at`) VALUES
-	(2, 6, 'asd', 'gggg', '2019-10-10 00:20:32', '2019-10-10 00:49:58'),
-	(3, 13, 'Jaket - Hitam - XL', 'asdad', '2019-10-10 14:12:12', NULL);
+	(4, 13, 'ASD', '', '2019-10-21 15:55:26', NULL),
+	(5, 12, 'mm', '', '2019-10-24 13:30:24', NULL),
+	(6, 1, 'Kaos', 'Bahan Jean', '2019-10-24 13:38:04', NULL);
 /*!40000 ALTER TABLE `bom` ENABLE KEYS */;
 
 -- Dumping structure for table pencatatan_barang.bom_detail
 CREATE TABLE IF NOT EXISTS `bom_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `produkid` int(11) DEFAULT NULL,
   `bomid` int(11) DEFAULT NULL,
   `materialid` int(11) DEFAULT NULL,
   `satuanid` int(11) DEFAULT NULL,
@@ -46,18 +48,26 @@ CREATE TABLE IF NOT EXISTS `bom_detail` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `materialid` (`materialid`),
   KEY `FK_bom_detail_bom` (`bomid`),
   KEY `FK_bom_detail_satuans` (`satuanid`),
+  KEY `FK_bom_detail_produk` (`produkid`),
+  KEY `Index 5` (`materialid`),
   CONSTRAINT `FK_bom_detail_bom` FOREIGN KEY (`bomid`) REFERENCES `bom` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_bom_detail_material` FOREIGN KEY (`materialid`) REFERENCES `material` (`id_material`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_bom_detail_produk` FOREIGN KEY (`produkid`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_bom_detail_satuans` FOREIGN KEY (`satuanid`) REFERENCES `satuans` (`id_satuan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- Dumping data for table pencatatan_barang.bom_detail: ~0 rows (approximately)
+-- Dumping data for table pencatatan_barang.bom_detail: ~7 rows (approximately)
 /*!40000 ALTER TABLE `bom_detail` DISABLE KEYS */;
-INSERT INTO `bom_detail` (`id`, `bomid`, `materialid`, `satuanid`, `qty`, `created_at`, `updated_at`) VALUES
-	(4, 3, 12, 1, 2, '2019-10-10 14:29:01', '2019-10-10 14:30:11');
+INSERT INTO `bom_detail` (`id`, `produkid`, `bomid`, `materialid`, `satuanid`, `qty`, `created_at`, `updated_at`) VALUES
+	(1, 13, 4, 12, 3, 2, '2019-10-22 21:47:45', '2019-10-22 21:47:46'),
+	(3, 13, 4, 11, 3, 1, '2019-10-22 22:34:55', NULL),
+	(4, NULL, 5, 9, 3, 9, '2019-10-24 13:30:59', NULL),
+	(6, NULL, 5, 11, 3, 4, '2019-10-24 13:35:57', NULL),
+	(7, NULL, 5, 8, 2, 5, '2019-10-24 13:36:46', NULL),
+	(8, NULL, 6, 12, 3, 5, '2019-10-24 13:38:22', NULL),
+	(9, 1, 6, 10, 1, 1, '2019-10-24 13:39:41', NULL);
 /*!40000 ALTER TABLE `bom_detail` ENABLE KEYS */;
 
 -- Dumping structure for table pencatatan_barang.groups
@@ -82,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
   `login` varchar(100) NOT NULL,
   `time` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table pencatatan_barang.login_attempts: ~0 rows (approximately)
 /*!40000 ALTER TABLE `login_attempts` DISABLE KEYS */;
@@ -95,23 +105,24 @@ CREATE TABLE IF NOT EXISTS `material` (
   `jenis` int(11) DEFAULT NULL,
   `qty_awal` int(11) DEFAULT NULL,
   `qty_retur` int(11) DEFAULT NULL,
+  `qty_keluar` int(11) DEFAULT NULL,
   `stok` int(11) DEFAULT '0',
   PRIMARY KEY (`id_material`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table pencatatan_barang.material: ~10 rows (approximately)
 /*!40000 ALTER TABLE `material` DISABLE KEYS */;
-INSERT INTO `material` (`id_material`, `label`, `jenis`, `qty_awal`, `qty_retur`, `stok`) VALUES
-	(1, 'asd', NULL, NULL, NULL, 0),
-	(3, 'ddd', NULL, NULL, NULL, 0),
-	(5, NULL, NULL, NULL, NULL, 0),
-	(6, 'HHH', NULL, NULL, NULL, 0),
-	(7, 'sss', NULL, NULL, NULL, 0),
-	(8, 'asd', NULL, NULL, NULL, 0),
-	(9, 'bbbb', NULL, NULL, NULL, 0),
-	(10, 'bbbb', NULL, NULL, NULL, 0),
-	(11, 'rrrrr', NULL, NULL, NULL, 0),
-	(12, 'Kancing', NULL, NULL, NULL, 5);
+INSERT INTO `material` (`id_material`, `label`, `jenis`, `qty_awal`, `qty_retur`, `qty_keluar`, `stok`) VALUES
+	(1, 'asd', NULL, NULL, NULL, NULL, 0),
+	(3, 'ddd', NULL, NULL, NULL, NULL, 0),
+	(5, NULL, NULL, NULL, NULL, NULL, 0),
+	(6, 'HHH', NULL, NULL, NULL, NULL, 0),
+	(7, 'sss', NULL, NULL, NULL, NULL, 0),
+	(8, 'asd', NULL, NULL, NULL, NULL, 0),
+	(9, 'bbbb', NULL, NULL, NULL, NULL, 0),
+	(10, 'bbbb', NULL, NULL, NULL, NULL, 0),
+	(11, 'rrrrr', NULL, NULL, NULL, 4, 4),
+	(12, 'Kancing', NULL, NULL, NULL, 2, 2);
 /*!40000 ALTER TABLE `material` ENABLE KEYS */;
 
 -- Dumping structure for table pencatatan_barang.pembelian
@@ -123,15 +134,18 @@ CREATE TABLE IF NOT EXISTS `pembelian` (
   `keterangan` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_pembelian`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
--- Dumping data for table pencatatan_barang.pembelian: ~4 rows (approximately)
+-- Dumping data for table pencatatan_barang.pembelian: ~7 rows (approximately)
 /*!40000 ALTER TABLE `pembelian` DISABLE KEYS */;
 INSERT INTO `pembelian` (`id_pembelian`, `nofaktur`, `suplier`, `tanggal`, `keterangan`, `status`) VALUES
 	(10, '786786', 'PT. ABC', '2019-10-07', 'kkkkjjjjjhhg', 'SELESAI'),
 	(12, '', NULL, NULL, NULL, NULL),
 	(13, '0222333', 'PT. BCS', '2019-10-10', 'Test kancing', NULL),
-	(14, '', NULL, NULL, NULL, NULL);
+	(15, '', NULL, NULL, NULL, NULL),
+	(16, '', NULL, NULL, NULL, NULL),
+	(17, '', NULL, NULL, NULL, NULL),
+	(18, '', NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `pembelian` ENABLE KEYS */;
 
 -- Dumping structure for table pencatatan_barang.pembelian_detail
@@ -151,43 +165,110 @@ CREATE TABLE IF NOT EXISTS `pembelian_detail` (
 /*!40000 ALTER TABLE `pembelian_detail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `pembelian_detail` ENABLE KEYS */;
 
+-- Dumping structure for table pencatatan_barang.pengembalian_material
+CREATE TABLE IF NOT EXISTS `pengembalian_material` (
+  `id` int(11) NOT NULL,
+  `produksiid` int(11) NOT NULL,
+  `materialid` int(11) DEFAULT NULL,
+  `jumlah` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK__material` (`materialid`),
+  KEY `FK_pengembalian_material_produksi` (`produksiid`),
+  CONSTRAINT `FK__material` FOREIGN KEY (`materialid`) REFERENCES `material` (`id_material`),
+  CONSTRAINT `FK_pengembalian_material_produksi` FOREIGN KEY (`produksiid`) REFERENCES `produksi` (`id_produksi`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table pencatatan_barang.pengembalian_material: ~0 rows (approximately)
+/*!40000 ALTER TABLE `pengembalian_material` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pengembalian_material` ENABLE KEYS */;
+
 -- Dumping structure for table pencatatan_barang.permintaan
 CREATE TABLE IF NOT EXISTS `permintaan` (
-  `id_permintaan` int(11) DEFAULT NULL,
+  `id_permintaan` int(11) NOT NULL AUTO_INCREMENT,
   `produkid` int(11) DEFAULT NULL,
   `tanggal` date DEFAULT NULL,
   `qty_permintaan` int(11) DEFAULT NULL,
-  `keterangan` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status` varchar(50) DEFAULT NULL,
+  `keterangan` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_permintaan`),
+  KEY `produkid` (`produkid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table pencatatan_barang.permintaan: ~0 rows (approximately)
+-- Dumping data for table pencatatan_barang.permintaan: ~2 rows (approximately)
 /*!40000 ALTER TABLE `permintaan` DISABLE KEYS */;
+INSERT INTO `permintaan` (`id_permintaan`, `produkid`, `tanggal`, `qty_permintaan`, `status`, `keterangan`) VALUES
+	(1, 13, '2019-10-24', 2, 'PROSES', NULL),
+	(2, NULL, NULL, NULL, NULL, NULL),
+	(3, 13, '2019-10-25', 4, 'PROSES', '');
 /*!40000 ALTER TABLE `permintaan` ENABLE KEYS */;
+
+-- Dumping structure for table pencatatan_barang.permintaan_detail
+CREATE TABLE IF NOT EXISTS `permintaan_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `permintaanid` int(11) DEFAULT NULL,
+  `materialid` int(11) DEFAULT NULL,
+  `satuanid` int(11) DEFAULT NULL,
+  `jumlah` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK__permintaan` (`permintaanid`),
+  KEY `FK_permintaan_detail_material` (`materialid`),
+  KEY `FK_permintaan_detail_satuans` (`satuanid`),
+  CONSTRAINT `FK__permintaan` FOREIGN KEY (`permintaanid`) REFERENCES `permintaan` (`id_permintaan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_permintaan_detail_material` FOREIGN KEY (`materialid`) REFERENCES `material` (`id_material`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_permintaan_detail_satuans` FOREIGN KEY (`satuanid`) REFERENCES `satuans` (`id_satuan`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table pencatatan_barang.permintaan_detail: ~2 rows (approximately)
+/*!40000 ALTER TABLE `permintaan_detail` DISABLE KEYS */;
+INSERT INTO `permintaan_detail` (`id`, `permintaanid`, `materialid`, `satuanid`, `jumlah`, `created_at`, `updated_at`) VALUES
+	(1, 1, 11, 3, 2, '2019-10-24 11:53:06', NULL),
+	(2, 1, 12, 3, 4, '2019-10-24 11:53:07', NULL),
+	(3, 3, 11, 3, 4, '2019-10-25 15:46:28', NULL),
+	(4, 3, 12, 3, 8, '2019-10-25 15:46:28', NULL);
+/*!40000 ALTER TABLE `permintaan_detail` ENABLE KEYS */;
 
 -- Dumping structure for table pencatatan_barang.produk
 CREATE TABLE IF NOT EXISTS `produk` (
   `id_produk` int(11) NOT NULL AUTO_INCREMENT,
+  `satuanid` int(11) DEFAULT NULL,
   `label` varchar(255) DEFAULT NULL,
   `stok` int(11) DEFAULT '0',
-  PRIMARY KEY (`id_produk`)
+  PRIMARY KEY (`id_produk`),
+  KEY `FK_produk_satuans` (`satuanid`),
+  CONSTRAINT `FK_produk_satuans` FOREIGN KEY (`satuanid`) REFERENCES `satuans` (`id_satuan`) ON DELETE SET NULL ON UPDATE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table pencatatan_barang.produk: ~12 rows (approximately)
 /*!40000 ALTER TABLE `produk` DISABLE KEYS */;
-INSERT INTO `produk` (`id_produk`, `label`, `stok`) VALUES
-	(1, 'Kaos', 5),
-	(2, 'Jaket', 6),
-	(3, 'asdadasdas', NULL),
-	(4, 'gggg', NULL),
-	(6, 'bbbb', NULL),
-	(7, 'ccccbbbsss', 0),
-	(8, 'hhhh', 0),
-	(9, 'kkkkk', 0),
-	(10, 'yyyy', 0),
-	(11, 'rrrrr', 0),
-	(12, 'ssssvvcc', 0),
-	(13, 'Jaket - Hitam', 0);
+INSERT INTO `produk` (`id_produk`, `satuanid`, `label`, `stok`) VALUES
+	(1, 3, 'Kaos', 5),
+	(2, 3, 'Jaket', 6),
+	(3, 3, 'asdadasdas', NULL),
+	(4, 3, 'gggg', NULL),
+	(6, 3, 'bbbb', NULL),
+	(7, 3, 'ccccbbbsss', 0),
+	(8, 3, 'hhhh', 0),
+	(9, 3, 'kkkkk', 0),
+	(10, 3, 'yyyy', 0),
+	(11, 3, 'rrrrr', 0),
+	(12, 2, 'ssssvvcc', 0),
+	(13, 3, 'Jaket - Hitam', 0);
 /*!40000 ALTER TABLE `produk` ENABLE KEYS */;
+
+-- Dumping structure for table pencatatan_barang.produksi
+CREATE TABLE IF NOT EXISTS `produksi` (
+  `id_produksi` int(11) NOT NULL,
+  `permintaanid` int(11) DEFAULT NULL,
+  `retur` int(11) NOT NULL,
+  `ketrangan` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_produksi`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table pencatatan_barang.produksi: ~0 rows (approximately)
+/*!40000 ALTER TABLE `produksi` DISABLE KEYS */;
+/*!40000 ALTER TABLE `produksi` ENABLE KEYS */;
 
 -- Dumping structure for table pencatatan_barang.satuans
 CREATE TABLE IF NOT EXISTS `satuans` (
