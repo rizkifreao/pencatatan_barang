@@ -120,8 +120,8 @@ class Produksi extends CI_Controller
         // insert ke tabel det_produksi
         $detProduksi =[
           'produksiid' => $lastID,
-          'materialid' => $material->id_material,
-          'satuanid' => $material->satuanid,
+          'materialid' => $key->materialid,
+          'satuanid' => $key->satuanid,
           'jumlah_sisa' => $jumlah
         ];
         $this->m_Produksi_detail->insert($detProduksi);
@@ -144,11 +144,10 @@ class Produksi extends CI_Controller
       foreach ($detPermintaan as $key) {
 
         // insert ke tabel det_produksi
-        $material = $this->M_Material->getDetail($key->materialid);
         $detProduksi =[
           'produksiid' => $lastID,
-          'materialid' => $material->id_material,
-          'satuanid' => $material->satuanid,
+          'materialid' => $key->materialid,
+          'satuanid' => $key->satuanid,
           'jumlah_sisa' => "0"
         ];
         $this->m_Produksi_detail->insert($detProduksi);
@@ -156,8 +155,25 @@ class Produksi extends CI_Controller
         $this->session->set_flashdata('alert', success("Berhasil disimpan"));
         redirect('produksi','refresh');
     }
+  }
 
-    
+  public function detail($id)
+  {
+    $produksi = $this->m_Produksi->getDetail($id);
+    if (!$produksi) {
+      $this->session->set_flashdata('alert', error("Data tidak ditemukan !"));
+      redirect('produksi','refresh');
+    }
+
+    $permintaan = $this->M_Permintaan->getDetail($produksi->permintaanid);
+
+    $data = [
+      'breadcumbs' => "Detail Produksi",
+      'produksi' => $produksi,
+      'det_produksi' => $this->m_Produksi_detail->getAllBy('produksiid ='.$produksi->id_produksi),
+      'permintaan'=>$permintaan
+    ];
+    $this->template->display('admin/produksi/detail',$data);
   }
 
 }

@@ -195,5 +195,19 @@ class Permintaan extends CI_Controller {
         $this->M_Permintaan->delete($id);
         redirect("permintaan");
     }
+
+    public function print($id)
+    {
+        $permintaan = $this->M_Permintaan->getDetail($id);
+        if (!$permintaan) {
+            echo "<script>window.alert('Error, Data tidak ditemukan !!'); close() </script>";
+        }
+        $data = [
+            'title' => "Faktur Permintaan Material",
+            'permintaan' => $permintaan,
+            'det_permintaan' => $this->m_Permintaan_detail->getAllBy("permintaanid =".$id)
+        ];
+        $this->load->view('admin/permintaan/print',$data);
+    }
     
 }

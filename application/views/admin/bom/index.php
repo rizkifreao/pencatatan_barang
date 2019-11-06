@@ -81,6 +81,20 @@
           </div>
 
           <div class="row">
+            <label for="inputState" class="col-md-3 col-form-label">Satuan</label>
+            <div class="col-md-9">
+              <div class="form-group">
+                <select id="pilihSatuan" name="produkid" class="form-control select2" style="width:100%" required="true" aria-required="true" aria-invalid="true">
+                  <option value="">Pilih Satuan...</option>
+                  <?php foreach ($satuans as $key):?>
+                  <option value="<?=$key->id_satuan ?>"><?=$key->nama_satuan ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
             <label for="inputProduk" class="col-md-3 col-form-label">Label.</label>
             <div class="col-md-9">
               <div class="form-group bmd-form-group">
@@ -132,6 +146,20 @@
           </div>
 
           <div class="row">
+            <label for="inputState" class="col-md-3 col-form-label">Satuan</label>
+            <div class="col-md-9">
+              <div class="form-group">
+                <select id="editSatuan" name="produkid" class="form-control select2" style="width:100%" required="true" aria-required="true" aria-invalid="true">
+                  <option value="">Pilih Satuan...</option>
+                  <?php foreach ($satuans as $key):?>
+                  <option value="<?=$key->id_satuan ?>"><?=$key->nama_satuan ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
             <label for="inputProduk" class="col-md-3 col-form-label">Label.</label>
             <div class="col-md-9">
               <div class="form-group bmd-form-group">
@@ -169,6 +197,16 @@
 		  dropdownParent: $("#createBom")
     });
 
+    $('#pilihSatuan').select2({
+      tags: true,
+		  dropdownParent: $("#createBom")
+    });
+
+    $('#editSatuan').select2({
+      tags: true,
+		  dropdownParent: $("#editBom")
+    });
+
     $('#createBom').on('hidden.bs.modal',function () {
       $('#produkid').val("");
       $('#produkid').select2().trigger('change');
@@ -187,10 +225,12 @@
         //Do stuff with the JSON data
           // console.log(data);
          $('#editBom #id').val(id).hide();
-         $('#editBom #produk_label').val(data.produk_label).focus();
-         $('#editBom #keterangan').val(data.keterangan).focus();
-         $('#editBom #produkid').val(data.produkid).focus();
-         $('#editBom #label').val(data.label).focus();
+         $('#editBom #produk_label').val(data.produk_label);
+         $('#editBom #keterangan').val(data.keterangan);
+         $('#editBom #produkid').val(data.produkid);
+         $('#editBom #label').val(data.label);
+         $('#editBom #editSatuan').val(data.satuanid);
+         $('#editBom #editSatuan').trigger("change");
         }
     });
   }

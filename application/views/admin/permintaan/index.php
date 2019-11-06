@@ -18,7 +18,7 @@
             <th>Produk</th>
             <th>Jumlah</th>
             <th>Tanggal</th>
-            <th>Status</th>
+            <th>Status Produksi</th>
             <th>Keterangan</th>
             <th class="disabled-sorting text-right">Actions</th>
           </tr>
@@ -39,13 +39,15 @@
                   onclick="window.location.href='<?=base_url()?>permintaan/detail/<?=$key->id_permintaan?>'">
                   <i class="material-icons">visibility</i>
               </button>
-              <?php //if ($key->status !== "SELESAI"): ?>
-      
-              <?php //endif ?>
-              <button class="btn btn-link btn-primary btn-just-icon remove" title="Selesai"
-                  onclick="window.location.href = '<?=base_url()?>produksi/create/<?=$key->id_permintaan?>'">
+              <a  title="Print" target="_blank" class="btn btn-link btn-primary btn-just-icon edit" href="<?=base_url()?>permintaan/print/<?=$key->id_permintaan?>">
+                  <i class="material-icons">print</i>
+                </a>
+              <?php if ($key->status !== "SELESAI"): ?>
+                  <button class="btn btn-link btn-primary btn-just-icon remove" title="Selesai"
+                    onclick="window.location.href = '<?=base_url()?>produksi/create/<?=$key->id_permintaan?>'">
                   <i class="material-icons">send</i>
-              </button>
+                  </button>
+              <?php endif ?>
             </td>
           </tr>
         <?php endforeach ?>

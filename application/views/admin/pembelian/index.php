@@ -33,8 +33,13 @@
                   onclick="window.location.href='<?=base_url()?>pembelian/detail/<?=$key->id_pembelian?>'">
                   <i class="material-icons">visibility</i>
               </button>
+              <?php if ($key->status == "SELESAI"): ?>
+                <a  title="Print" target="_blank" class="btn btn-link btn-primary btn-just-icon edit" href="<?=base_url()?>pembelian/print/<?=$key->id_pembelian?>">
+                  <i class="material-icons">print</i>
+                </a>
+              <?php endif ?>
               <?php if ($key->status !== "SELESAI"): ?>
-                <button title="Ubah" class="btn btn-link btn-warning btn-just-icon edit"
+                <button title="Ubah" class="btn btn-link btn-warning btn-just-icon edit" 
                   onclick="window.location.href='<?=base_url()?>pembelian/create/<?=$key->id_pembelian?>'">
                   <i class="material-icons">dvr</i>
                 </button>

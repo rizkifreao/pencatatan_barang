@@ -24,6 +24,7 @@ class Bom extends CI_Controller {
         $data['breadcumbs'] = "Bill Of Material";
         $data['boms'] = $this->M_Bom->getAll();
         $data['produks'] = $this->M_Produk->getAll();
+        $data['satuans'] = $this->M_Satuan->getAll();
         $this->template->display('admin/bom/index',$data);
     }
 
@@ -59,6 +60,7 @@ class Bom extends CI_Controller {
             'produk_label' => $this->M_Produk->getDetail($bom->produkid)->label,   
             'label' => $bom->label,   
             'keterangan' => $bom->keterangan,   
+            'satuanid' => $bom->satuanid,   
         ];
         echo json_encode($data);
     }

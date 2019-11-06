@@ -18,7 +18,7 @@
             <th>No Permintaan</th>
             <th>Produk</th>
             <th>Retur</th>
-            <!-- <th class="disabled-sorting text-right">Actions</th> -->
+            <th class="disabled-sorting text-right">Actions</th>
           </tr>
         </thead>
 
@@ -30,16 +30,12 @@
               <td><?=$key->permintaanid ?></td>
               <td><?=($this->M_Produk->getDetail($this->M_Permintaan->getDetail($key->permintaanid)->produkid)) ? $this->M_Produk->getDetail($this->M_Permintaan->getDetail($key->permintaanid)->produkid)->label: "" ?></td>
               <td><?=$key->retur ?></td>
-              <!-- <td class="text-right">
-                    <button data-id="<?=$key->id_produk ?>" title="Ubah" class="btn btn-link btn-warning btn-just-icon edit" data-toggle="modal" data-target="#editModal"
-                        onclick="getDetail(this)">
-                        <i class="material-icons">dvr</i>
-                    </button>
-                    <button class="btn btn-link btn-danger btn-just-icon remove" title="Hapus"
-                        onclick="hapusConfirm('<?=base_url();?>produk/delete/<?=$key->id_produk ?>')">
-                        <i class="material-icons">close</i>
-                    </button>
-              </td> -->
+              <td class="text-right">
+                <button title="Detail" class="btn btn-link btn-info btn-just-icon view"
+                  onclick="window.location.href='<?=base_url()?>produksi/detail/<?=$key->id_produksi?>'">
+                  <i class="material-icons">visibility</i>
+                </button>
+              </td>
             </tr>
           <?php endforeach ?>
         </tbody>

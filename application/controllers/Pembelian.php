@@ -26,7 +26,7 @@ class Pembelian extends CI_Controller {
     public function index()
     {
         $data['breadcumbs'] = "Pembelian Material";
-        $data['pembelians'] = $this->M_Pembelian->getAll();
+        $data['pembelians'] = $this->M_Pembelian->getAllBy('nofaktur != ""');
         $this->template->display('admin/pembelian/index',$data);
     }
 
@@ -120,7 +120,7 @@ class Pembelian extends CI_Controller {
 		$pembelian["suplier"] = $this->input->post("suplier");
 		$pembelian["tanggal"] = $this->input->post("tanggal");
         $pembelian["keterangan"] = $this->input->post("keterangan");
-        $pembelian["status"] = $this->input->post("SELESAI");
+        $pembelian["status"] = "SELESAI";
         // echo json_encode($pembelian);
         $this->M_Pembelian->update($pembelianid,$pembelian);
 
@@ -181,5 +181,19 @@ class Pembelian extends CI_Controller {
             $this->session->set_flashdata('alert',success('Data berhasil dihapus'));
         }
         redirect("pembelian");
+    }
+
+    public function print($id)
+    {
+        $pembelian = $this->M_Pembelian->getDetail($id);
+        if (!$pembelian) {
+            echo "<script>window.alert('Error, Data tidak ditemukan !!'); close() </script>";
+        }
+        $data = [
+            'title' => "Faktur Pembelian",
+            'pembelian' => $pembelian,
+            'det_pembelian' => $this->M_Pembelian_detail->getAllBy("pembelianid =".$id)
+        ];
+        $this->load->view('admin/pembelian/print',$data);
     }
 }

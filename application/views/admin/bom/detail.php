@@ -20,6 +20,10 @@
           <label for="inputProduk" class="bmd-label-static">Nama Produk</label>
           <input type="text" class="form-control" value="<?=$this->M_Produk->getDetail($bom->produkid)->label?>" disabled>
         </div>
+        <div class="form-group bmd-form-group">
+          <label for="inputProduk" class="bmd-label-static">Satuan</label>
+          <input type="text" class="form-control" value="<?=$this->M_Satuan->getDetail($bom->satuanid)->nama_satuan?>" disabled>
+        </div>
       </div>
 
       <div class="col-md-6">
