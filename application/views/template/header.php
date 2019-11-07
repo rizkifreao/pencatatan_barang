@@ -61,7 +61,7 @@
               <a class="dropdown-item" href="#">Profile</a>
               <a class="dropdown-item" href="#">Settings</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Log out</a>
+              <button onclick="window.location.href='<?=base_url()?>auth/logout'" class="dropdown-item">Log out</button>
           </div>
         </li>
       </ul>
