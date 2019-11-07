@@ -176,6 +176,20 @@ class Produksi extends CI_Controller
     $this->template->display('admin/produksi/detail',$data);
   }
 
+  public function print($id)
+    {
+      $produksi = $this->m_Produksi->getDetail($id);
+      if (!$produksi) {
+          echo "<script>window.alert('Error, Data tidak ditemukan !!'); close() </script>";
+      }
+      $data = [
+          'title' => "Faktur Hasil Produksi",
+          'produksi' => $produksi,
+          'det_produksi' => $this->m_Produksi_detail->getAllBy("produksiid =".$id)
+      ];
+      $this->load->view('admin/produksi/print',$data);
+    }
+
 }
 
 

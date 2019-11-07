@@ -35,6 +35,9 @@
                   onclick="window.location.href='<?=base_url()?>produksi/detail/<?=$key->id_produksi?>'">
                   <i class="material-icons">visibility</i>
                 </button>
+                <a  title="Print" target="_blank" class="btn btn-link btn-primary btn-just-icon edit" href="<?=base_url()?>produksi/print/<?=$key->id_produksi?>">
+                  <i class="material-icons">print</i>
+                </a>
               </td>
             </tr>
           <?php endforeach ?>
