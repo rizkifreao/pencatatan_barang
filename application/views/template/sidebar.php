@@ -137,8 +137,8 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="<?=base_url() ?>/examples/widgets.html">
+          <li class="nav-item <?= $this->uri->segment(1) == 'laporan'? 'active' : '' ?>">
+            <a class="nav-link" href="<?=base_url('laporan')?>">
               <i class="material-icons">widgets</i>
               <p> Laporan </p>
             </a>
