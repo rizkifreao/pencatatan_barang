@@ -84,7 +84,7 @@
             <label for="inputState" class="col-md-3 col-form-label">Satuan</label>
             <div class="col-md-9">
               <div class="form-group">
-                <select id="pilihSatuan" name="produkid" class="form-control select2" style="width:100%" required="true" aria-required="true" aria-invalid="true">
+                <select id="pilihSatuan" name="satuanid" class="form-control select2" style="width:100%" required="true" aria-required="true" aria-invalid="true">
                   <option value="">Pilih Satuan...</option>
                   <?php foreach ($satuans as $key):?>
                   <option value="<?=$key->id_satuan ?>"><?=$key->nama_satuan ?></option>

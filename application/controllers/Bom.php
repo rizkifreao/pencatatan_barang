@@ -34,6 +34,7 @@ class Bom extends CI_Controller {
         
         $data['label'] = $this->input->post('label',TRUE);
         $data['keterangan'] = $this->input->post('keterangan',TRUE);
+        $data['satuanid'] = $this->input->post('satuanid',TRUE);
         
         if ($id) {
             $data['updated_at'] = date('Y-m-d H:i:s');
