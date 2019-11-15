@@ -32,7 +32,7 @@ class Laporan extends CI_Controller
     $data = [
       'breadcumbs' => 'Laporan'
     ];
-    $this->template->display('admin/laporan/index');
+    $this->template->display('admin/laporan/index',$data);
   }
 
 }
