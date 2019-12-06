@@ -61,5 +61,12 @@ class Produk extends CI_Controller {
         redirect('produk');
     }
 
+    public function test()
+    {
+        $dataLogin = array('status' => true,'token'=> '1234' );
+
+        echo $dataLogin['token'];
+    }
+
 
 }

@@ -35,6 +35,23 @@ class Laporan extends CI_Controller
     $this->template->display('admin/laporan/index',$data);
   }
 
+  public function print()
+  {
+    $startDate = $this->input->post("periodeAwal");
+    $endDate = $this->input->post("periodeAkhir");
+    $produksi = $this->m_Produksi->getAllBy(array(
+      'tanggal >=' => $startDate,
+      'tanggal <=' => $endDate,
+    ));
+    // echo json_encode($produksi);
+    $data = [
+      'title' => "Laporan",
+      'periode' => $startDate." - ".$endDate,
+      'produksi' => $produksi
+    ];
+    $this->load->view('admin/laporan/print',$data);
+  }
+
 }
 
 

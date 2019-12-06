@@ -9,7 +9,7 @@
     <div class="toolbar">
     </div>
 
-    <form action="">
+    <form action="<?=base_url()?>laporan/print" method="post" target="_blank">
       <div class="row">
         <label class="col-sm-2 col-form-label">Tanggal Periode</label>
         <div class="col-sm-2">
@@ -28,6 +28,9 @@
           </div>
         </div>
       </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="btn-simpan">Print</button>
+        </div>
     </form>
     <!-- <div class="material-datatables">
       <table id="tabel_material" class="table  table-striped table-no-bordered table-hover custom-table" cellspacing="0" width="100%"
@@ -80,21 +83,27 @@
 
   $(document).ready(function () {
     
-    var tglAwal = $("#periodeAwal").datetimepicker({format: "Y-M-DD"})
-  
-    $('#periodeAkhir').datetimepicker({format: "Y-M-DD",minDate: tglAwal.val()}).on('dp.change', function (ev) {
-      
-      if ($('#periodeAkhir').val() != '' && $('#periodeAwal').val() != '') {
-        var startDate = $('#periodeAwal').val().replace(/\//g, '');
-        var endDate = $('#periodeAkhir').val().replace(/\//g, '');
+    $("#periodeAwal").datetimepicker({format: "Y-M-DD"})
+    $(".modal-footer").hide()
+    $('#periodeAkhir').datetimepicker({format: "Y-M-DD"}).on('dp.change', function (ev) {
+        
+        if ($('#periodeAkhir').val() != '' && $('#periodeAwal').val() != '') {
+          var startDate = $('#periodeAwal').val().replace(/\//g, '');
+          var endDate = $('#periodeAkhir').val().replace(/\//g, '');
 
-        // console.log(startDate+" sd "+endDate);
-        reloadTable(startDate,endDate)
-        // reloadTableByDate(startDate, endDate, asuransiId, leasingId);
-      }else {
-        alert('pilih tanggal periode mulai');
-      }
-    });
+          // console.log(startDate+" sd "+endDate);
+          if(startDate <= endDate){
+            // reloadTable(startDate,endDate)
+            $(".modal-footer").show()
+          }else{
+            alert('Tanggal periode akhir tidak boleh lebih kecil dari tanggal awal');
+            $('#periodeAkhir').val(startDate); 
+          }
+          // reloadTableByDate(startDate, endDate, asuransiId, leasingId);
+        }else {
+          alert('pilih tanggal periode mulai');
+        }
+      });
 
   })
 

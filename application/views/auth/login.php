@@ -166,6 +166,10 @@
                 <div class="card-footer justify-content-center">
                   <button type="submit" class="btn btn-rose btn-link btn-lg">Sign in</button>
                 </div>
+                <div class="card-footer justify-content-center">
+                  <a href="">Lupa password ?</a>
+                </div>
+                
               </div>
             <!-- </form> -->
             <?= form_close()?>
