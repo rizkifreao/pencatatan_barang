@@ -28,6 +28,21 @@
           </div>
         </div>
       </div>
+
+      <div class="row view_jenis_laporan" style="display:none">
+        <label for="inputState" class="col-md-2 col-form-label">Laporan</label>
+        <div class="col-md-9">
+          <div class="form-group">
+            <select id="jenis_laporan" name="jenis_laporan" class="form-control select2" style="width:50%">
+              <option value="">Pilih Laporan...</option>
+              <option value="produksi">Produksi</option>
+              <option value="pembelian">Pembelian</option>
+              <option value="permintaan">Permintaan</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       <div class="modal-footer">
           <button type="submit" class="btn btn-primary" id="btn-simpan">Print</button>
         </div>
@@ -82,6 +97,11 @@
 <script>
 
   $(document).ready(function () {
+
+    $("#jenis_laporan").select2({
+      tags: true,
+      // dropdownParent: $("#createModal")
+    })
     
     $("#periodeAwal").datetimepicker({format: "Y-M-DD"})
     $(".modal-footer").hide()
@@ -94,6 +114,7 @@
           // console.log(startDate+" sd "+endDate);
           if(startDate <= endDate){
             // reloadTable(startDate,endDate)
+            $(".view_jenis_laporan").show()
             $(".modal-footer").show()
           }else{
             alert('Tanggal periode akhir tidak boleh lebih kecil dari tanggal awal');

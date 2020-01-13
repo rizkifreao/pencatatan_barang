@@ -39,17 +39,44 @@ class Laporan extends CI_Controller
   {
     $startDate = $this->input->post("periodeAwal");
     $endDate = $this->input->post("periodeAkhir");
-    $produksi = $this->m_Produksi->getAllBy(array(
-      'tanggal >=' => $startDate,
-      'tanggal <=' => $endDate,
-    ));
-    // echo json_encode($produksi);
-    $data = [
-      'title' => "Laporan",
-      'periode' => $startDate." - ".$endDate,
-      'produksi' => $produksi
-    ];
-    $this->load->view('admin/laporan/print',$data);
+    $jenis_laporan = $this->input->post("jenis_laporan");
+    if ($jenis_laporan == "produksi") {
+      $produksi = $this->m_Produksi->getAllBy(array(
+        'tanggal >=' => $startDate,
+        'tanggal <=' => $endDate,
+      ));
+      // echo json_encode($produksi);
+      $data = [
+        'title' => "Laporan Produksi",
+        'periode' => $startDate." - ".$endDate,
+        'produksi' => $produksi
+      ];
+      $this->load->view('admin/laporan/print',$data);
+    }else if($jenis_laporan == "pembelian"){
+      $pembelian = $this->M_Pembelian->getAllBy(array(
+        'tanggal >=' => $startDate,
+        'tanggal <=' => $endDate,
+      ));
+      // echo json_encode($pembelian);
+      $data = [
+        'title' => "Laporan Pembelian",
+        'periode' => $startDate." - ".$endDate,
+        'pembelian' => $pembelian
+      ];
+      $this->load->view('admin/laporan/laporan_pembelian',$data);
+    }else {
+      $permintaan = $this->M_Permintaan->getAllBy(array(
+        'tanggal >=' => $startDate,
+        'tanggal <=' => $endDate,
+      ));
+      // echo json_encode($Permintaan);
+      $data = [
+        'title' => "Laporan Material Keluar",
+        'periode' => $startDate." - ".$endDate,
+        'permintaan' => $permintaan
+      ];
+      $this->load->view('admin/laporan/laporan_permintaan',$data);
+    }
   }
 
 }

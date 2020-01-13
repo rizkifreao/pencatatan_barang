@@ -49,6 +49,28 @@ $(document).ready(function () {
 		dropdownParent: $("#createModal")
 	})
 
+	$("#createModal #Material").on('change', function () {
+		var materialid = $(this).val()
+		// console.log(materialid);
+
+		if (materialid != "") {
+			$.ajax({
+				url: base_url + 'material/detailJson/' + materialid,
+				type: 'GET',
+				// data: {
+				// 	materialid: $(this).val()
+				// },
+				dataType: 'json',
+				success: function (response) {
+					$("#createModal input[name=stok_awal]").val(response.stok)
+					$("#createModal .stok_awal").show(true)
+				}
+			})
+		} else {
+			$("#createModal .stok_awal").hide()
+		}
+	})
+
 	$('#btn-simpan').click(function () { // Ketika tombol simpan di klik
 
 		var check_form = $("#ValidationModal").valid()

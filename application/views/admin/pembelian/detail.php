@@ -47,6 +47,8 @@
             <th>Kode Material</th>
             <th>Label</th>
             <th>Jumlah</th>
+            <th>Stok Awal</th>
+            <th>Stok Akhir</th>
           </tr>
         </thead>
         <tbody>
@@ -56,6 +58,8 @@
             <td><?=$key->materialid?></td>
             <td><?=$this->M_Material->getDetail($key->materialid)->label?></td>
             <td><?=$key->jumlah?></td>
+            <td><?=$key->stok_awal?></td>
+            <td><?=$key->stok_awal + $key->jumlah ?></td>
           </tr>
           <?php endforeach ?>
         </tbody>

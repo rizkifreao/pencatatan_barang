@@ -21,7 +21,7 @@
 					<div class="row">
 			      <div class="col-xs-12">
 			        <h1 class="page-header text-center">
-			          Laporan Produksi
+			          <?=$title ?>
 			        </h1>
 			      </div>
 			      <!-- /.col -->
@@ -36,47 +36,45 @@
 			      </div>
 			      <!-- /.col -->
 			    </div>
-			    <!-- info row -->
-			    <!-- <div class="row invoice-info">
-			      
-			      <div class="col-sm-4 invoice-col">
-			        
-			        <b>Bill ID :</b> <?=$pembelian->id_pembelian ?><br>
-			        <b>No Faktur :</b> <?=$pembelian->nofaktur ?><br>
-			        <b>Suplier :</b> <?=$pembelian->suplier ?> <br />
-			        <b>Keterangan :</b> <?=$pembelian->keterangan ?> 
-			      </div>
-			    </div> -->
-			    <!-- /.row -->
-
-			    <!-- Table row -->
 					<br>
 			    <div class="row">
 			      <div class="col-xs-12 table-responsive">
-			        <table class="table table-striped">
+			        <table class="table">
 			          <thead>
 			          <tr>
-			            <th>#</th>
-			            <th>ID Produksi</th>
-			            <th>Produk</th>
-			            <th>Retur</th>
+			            <th class="text-uppercase text-center" width="30px">No</th>
+			            <th class="text-uppercase text-center">No Faktur</th>
+			            <th class="text-uppercase text-center">Suplier</th>
+			            <th class="text-uppercase text-center">Keterangan</th>
 			          </tr>
 			          </thead>
 			          <tbody> 
-									<?php $no=1; foreach ($produksi as $key ):?>
-                  <?php 
-                    $permintaan = $this->M_Permintaan->getDetail($key->permintaanid);
-                    $produk = $this->M_Produk->getDetail($permintaan->produkid)->label;
-                  ?>
-										<tr>
-											<td><?= $no++ ?></td>
-											<td><?= $key->id_produksi ?></td>
-											<td><?= $produk ?></td>
-											<td><?= $key->retur ?></td>
-										</tr>
+									<?php $no=1; foreach ($pembelian as $key ):?>
+                    <tr style="background-color : #f2f2f2">
+                      <td class="text-center"><?= $no++ ?></td>
+                      <td class="text-uppercase"><?= $key->nofaktur ?></td>
+                      <td class="text-uppercase"><?= $key->suplier ?></td>
+                      <td class="text-uppercase"><?= $key->keterangan ?></td>
+                    </tr>
+                    <?php $barangs = $this->M_Pembelian_detail->getAllBy(['pembelianid'=>$key->id_pembelian]);
+                      foreach ($barangs as $barang ) :            
+                    ?>
+                      <tr>
+                        <td></td>
+                        <td class="text-sm-left"><?=$this->M_Material->getDetail($barang->materialid)->label?></td>
+                        <td class="text-sm-left"><?= $barang->jumlah ?></td>
+                        <td class="text-sm-left">Pcs</td>
+                      </tr>
+                    <?php endforeach; ?>
 									<?php endforeach ?>
-			          
 			          </tbody>
+                <tfoot>
+                  <tr>
+                    <th></th>
+                    <th>Total Pembelian :</th>
+                    <th><?=count($pembelian) ?></th>
+                  </tr>
+                </tfoot>
 			        </table>
 			      </div>
 			      <!-- /.col -->

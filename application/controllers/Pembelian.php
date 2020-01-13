@@ -89,6 +89,7 @@ class Pembelian extends CI_Controller {
         $data["pembelianid"] = $pembelianid = $this->input->post("pembelianid");
         $data["materialid"] = $id_material = $this->input->post("materialid");
         $data["jumlah"] = $jumlah = $this->input->post("jumlah");
+        $data["stok_awal"] = $this->input->post("stok_awal");
 
         if ($id) {
             $this->M_Pembelian_detail->update($id,$data);

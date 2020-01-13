@@ -144,7 +144,7 @@
             </a>
           </li>
           <li class="nav-item <?= $this->uri->segment(1) == 'backup'? 'active' : '' ?>">
-            <a class="nav-link" href="<?=base_url('laporan')?>">
+            <a class="nav-link" href="<?=base_url('backup')?>">
               <i class="fa fa-cog fa-2x"></i>
               <p> Backup </p>
             </a>

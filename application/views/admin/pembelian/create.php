@@ -12,12 +12,6 @@
         Form Pembelian Material
       </h4>
       <br>
-      <div class="row">
-        <div class="col text-center">
-          <button type="submit" class="btn btn-rose">Selesai</button>
-          <button type="button" class="btn btn-default" onclick="window.location.href='<?=base_url()?>pembelian/pembelianBatal/<?=$this->uri->segment(3,0)?>'">Batal</button>
-        </div>
-      </div>
       
     </div>
     <div class="card-body ">
@@ -46,7 +40,6 @@
       </div>
     </div>
   </div>
-</form>
   <div class="card">
     <div class="card-header card-header-primary card-header-icon">
       <a href="#" class="card-icon text-white" id="btn-tambah" data-toggle="modal" data-target="#createModal">
@@ -61,8 +54,16 @@
         <?php $this->load->view('admin/pembelian/tabel',array('det_material' => $det_material)) ?>
       </div>
     </div>
+    <div class="row">
+        <div class="col text-center">
+          <button type="submit" class="btn btn-rose">Selesai</button>
+          <button type="button" class="btn btn-default" onclick="window.location.href='<?=base_url()?>pembelian/pembelianBatal/<?=$this->uri->segment(3,0)?>'">Batal</button>
+        </div>
+      </div>
+      <br>
   <!-- end content-->
   </div>
+</form>
 
 
 <div id="createModal" class="modal" tabindex="-1" role="dialog">
@@ -88,6 +89,15 @@
                   <option value="<?=$key->id_material ?>"><?=$key->label ?></option>
                   <?php endforeach ?>
                 </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row stok_awal" style="display:none">
+            <label for="inputProduk" class="col-md-3 col-form-label">Stok Awal.</label>
+            <div class="col-md-9">
+              <div class="form-group bmd-form-group">
+                <input type="number" min="1" class="form-control" name="stok_awal" readonly>
               </div>
             </div>
           </div>
