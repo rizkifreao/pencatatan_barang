@@ -104,7 +104,7 @@ class Backup extends CI_Controller {
         $this->load->helper('file');
         // $this->load->model('sismas_m');
         $config['upload_path']="./backup/db/";
-        $config['allowed_types']="jpg|png|gif|jpeg|bmp|sql|x-sql";
+        $config['allowed_types']="sql|x-sql";
         $this->load->library('upload',$config);
         $this->upload->initialize($config);
 
@@ -119,23 +119,21 @@ class Backup extends CI_Controller {
         $file = $this->upload->data();  //DIUPLOAD DULU KE DIREKTORI assets/database/
         $fotoupload=$file['file_name'];
                     
-          $isi_file = file_get_contents('./backup/db/' . $fotoupload); //PANGGIL FILE YANG TERUPLOAD
-          $string_query = rtrim( $isi_file, "\n;" );
-          $array_query = explode(";", $string_query);   //JALANKAN QUERY MERESTORE KEDATABASE
-              foreach($array_query as $query)
-              {
-                    $this->db->query($query);
-              }
-
-          $path_to_file = './backup/db/' . $fotoupload;
-            if(unlink($path_to_file)) {   // HAPUS FILE YANG TERUPLOAD
-                 redirect('utilitas');
-            }
-            else {
-                //  echo 'errors occured';
-                $this->session->set_flashdata('failed', 'Errors Occured');
-            }
-        
+        $isi_file = file_get_contents('./backup/db/' . $fotoupload); //PANGGIL FILE YANG TERUPLOAD
+        $string_query = rtrim( $isi_file, "\n;" );
+        $array_query = explode(";", $string_query);   //JALANKAN QUERY MERESTORE KEDATABASE
+        foreach($array_query as $query)
+        {
+              $this->db->query($query);
+        }
+        $path_to_file = './backup/db/' . $fotoupload;
+        if(unlink($path_to_file)) {   // HAPUS FILE YANG TERUPLOAD
+              redirect('utilitas');
+        }
+        else {
+            //  echo 'errors occured';
+            $this->session->set_flashdata('failed', 'Errors Occured');
+        }
     }
 
   public function test()
